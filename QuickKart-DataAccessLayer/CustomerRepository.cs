@@ -36,6 +36,7 @@ namespace QuickKart_DataAccessLayer
 
         }
 
+        //ADO.net
         public List<Product> GetProductsFromDatabase()
         {
             List<Product> lstProduct = new List<Product>();
@@ -63,11 +64,51 @@ namespace QuickKart_DataAccessLayer
             {
 
                 lstProduct = null;
-                logger.LogInformation("Successfully fetched the products from DB");
+                logger.LogInformation("Failed in fetching the products "+e.Message);
 
 
             }
+            finally
+            {
+                conObj.Close();
+            }
             return lstProduct;
+
+        }
+
+
+        public bool AddSubscriberDAL(string emailID)
+        {
+             bool result = false;
+                cmdObj = new SqlCommand("usp_AddSubscriber", conObj);
+                cmdObj.CommandType = CommandType.StoredProcedure;
+            SqlParameter prmEmailID = new SqlParameter("@emailID", emailID);
+            prmEmailID.Direction = ParameterDirection.Input;
+            cmdObj.Parameters.Add(prmEmailID);
+
+                try
+                {
+                    SqlParameter prmReturnValue = new SqlParameter();
+                    prmReturnValue.Direction = ParameterDirection.ReturnValue;
+                    cmdObj.Parameters.Add(prmReturnValue);
+                    conObj.Open();
+                    cmdObj.ExecuteNonQuery();
+                    int res = Convert.ToInt32(prmReturnValue.Value);
+                    if (res == 1)
+                        result = true;//it means added
+                    else
+                        result = false;//error
+                }
+                catch (Exception e)
+                {
+                    result = false;
+                    
+                }
+                finally
+                {
+                    conObj.Close();
+                }
+            return result;
 
         }
 
