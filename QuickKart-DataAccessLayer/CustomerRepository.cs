@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using QuickKart_DataAccessLayer.Models;
 using System;
@@ -20,19 +22,24 @@ namespace QuickKart_DataAccessLayer
         public CustomerRepository(ILogger<CustomerRepository> _logger)
         {
             logger = _logger;
-            conObj = new SqlConnection(GetConnectionString());
+            conObj = new SqlConnection(GetConnectionStringFromKeyVault());
         }
 
-        public string GetConnectionString()
+        
+
+
+        public string GetConnectionStringFromKeyVault()
         {
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
-            var config = builder.Build();
-            var connectionString = config.GetConnectionString("DBConnectionString");
+            string tenantID = "";
+            string clientID = "";
+            string clientSecret = "";
+            string KeyVaultUrl = "";
+            ClientSecretCredential clientCredentials = new ClientSecretCredential(tenantID, clientID, clientSecret);
+            SecretClient secretClient = new SecretClient(new Uri(KeyVaultUrl), clientCredentials);
+            
+            var secret = secretClient.GetSecret("");
 
-            logger.LogInformation(connectionString);
-
-            //   System.IO.File.AppendAllText(@"E:\stepTrack.txt", Directory.GetCurrentDirectory());
-            return connectionString;
+            return secret.Value.Value;
 
         }
 
