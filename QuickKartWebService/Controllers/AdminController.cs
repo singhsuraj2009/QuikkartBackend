@@ -24,10 +24,11 @@ namespace QuickKartWebService.Controllers
                 string Bloburl = "";
                 if (file.Length > 0)
                 {
+                    //Your code starts
                     
                     try
                     {
-                        // Get a reference to a blob
+                        
                       
                     }
                     catch
