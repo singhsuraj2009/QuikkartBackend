@@ -25,16 +25,3 @@ namespace QuickKartWebService
     }
 }
 
-
-//public string GetConnectionString()
-//{
-//    var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
-//    var config = builder.Build();
-//    var connectionString = config.GetConnectionString("DBConnectionString");
-
-//    logger.LogInformation(connectionString);
-
-//    //   System.IO.File.AppendAllText(@"E:\stepTrack.txt", Directory.GetCurrentDirectory());
-//    return connectionString;
-
-//}

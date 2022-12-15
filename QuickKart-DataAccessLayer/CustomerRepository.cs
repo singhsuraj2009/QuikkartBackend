@@ -22,26 +22,38 @@ namespace QuickKart_DataAccessLayer
         public CustomerRepository(ILogger<CustomerRepository> _logger)
         {
             logger = _logger;
-            conObj = new SqlConnection(GetConnectionStringFromKeyVault());
+            conObj = new SqlConnection(GetConnectionString());
         }
 
-        
 
 
-        public string GetConnectionStringFromKeyVault()
+        public string GetConnectionString()
         {
-            string tenantID = "";
-            string clientID = "";
-            string clientSecret = "";
-            string KeyVaultUrl = "";
-            ClientSecretCredential clientCredentials = new ClientSecretCredential(tenantID, clientID, clientSecret);
-            SecretClient secretClient = new SecretClient(new Uri(KeyVaultUrl), clientCredentials);
-            
-            var secret = secretClient.GetSecret("");
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
+            var config = builder.Build();
+            var connectionString = config.GetConnectionString("DBConnectionString");
 
-            return secret.Value.Value;
+            logger.LogInformation(connectionString);
+
+            //   System.IO.File.AppendAllText(@"E:\stepTrack.txt", Directory.GetCurrentDirectory());
+            return connectionString;
 
         }
+
+        //public string GetConnectionStringFromKeyVault()
+        //{
+        //    string tenantID = "";
+        //    string clientID = "";
+        //    string clientSecret = "";
+        //    string KeyVaultUrl = "";
+        //    ClientSecretCredential clientCredentials = new ClientSecretCredential(tenantID, clientID, clientSecret);
+        //    SecretClient secretClient = new SecretClient(new Uri(KeyVaultUrl), clientCredentials);
+
+        //    var secret = secretClient.GetSecret("");
+
+        //    return secret.Value.Value;
+
+        //}
 
         //ADO.net
         public List<Product> GetProductsFromDatabase()
