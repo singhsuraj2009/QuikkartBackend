@@ -21,22 +21,32 @@ namespace QuickKartWebService.Controllers
                 var formCollection = await Request.ReadFormAsync();
                 var file = formCollection.Files.First();
                 var fileName = file.FileName;
-                string Bloburl = "";
+                string url = "";
                 if (file.Length > 0)
                 {
-                    //Your code starts
-                    
+                    string connectionString = "DefaultEndpointsProtocol=https;AccountName=quickcartstorage;AccountKey=ka3p1LOkh6rM4cwBUv5/oDsmfccN2EF1lLF6YP09i618Nq4na2GuomcqZXuoQ8Mc4Ohcc0mD9Dbm+AStcGEfeQ==;EndpointSuffix=core.windows.net";
+                    string containerName = "data";
+                    BlobContainerClient container = new BlobContainerClient(connectionString, containerName);
+
                     try
                     {
-                        
-                      
+                        // Get a reference to a blob
+                        BlobClient blob = container.GetBlobClient(fileName);
+
+                        // Open the file and upload its data
+                        using (Stream file1 = file.OpenReadStream())
+                        {
+                            blob.Upload(file1);
+                        }
+
+                         url = blob.Uri.AbsoluteUri;
                     }
                     catch
                     {
                         return BadRequest();
                     }
 
-                    return Ok(Bloburl);
+                    return Ok(url);
                 }
                 else
                 {
