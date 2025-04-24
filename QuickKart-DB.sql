@@ -11,14 +11,14 @@ Discount int,
 ProductImage varchar(1000)
 )
 
-insert into Product values('Sony Camera',20000,'Sony India',10,'https://quickcartstorage.blob.core.windows.net/products/Point_and_shoot_cameras.jpg')
-insert into Product values('Samsung TV',34000,'Samsung India',20,'https://quickcartstorage.blob.core.windows.net/products/TV.jpg')
-insert into Product values('Apple watch',30000,'Apple India',12,'https://quickcartstorage.blob.core.windows.net/products/watch.jpg')
-insert into Product values('TMC Protien',4000,'TMC India',15,'https://quickcartstorage.blob.core.windows.net/products/supplement.jpg')
-insert into Product values('US Polo Shirt',2500,'US Polo India',17,'https://quickcartstorage.blob.core.windows.net/products/shirt.jpg')
-insert into Product values('Aviator Eye glass',1000,'Aviator India',20,'https://quickcartstorage.blob.core.windows.net/products/eyewear.gif')
-insert into Product values('Spyker Jeans',2000,'Spyker India',50,'https://quickcartstorage.blob.core.windows.net/products/jeans.jpg')
-insert into Product values('Jumpsuit',500,'Rst India',20,'https://quickcartstorage.blob.core.windows.net/products/jumpsuits.gifs')
+insert into Product values('Sony Camera',20000,'Sony India',10,'https://ctb35komal.blob.core.windows.net/productimages/Point_and_shoot_cameras.jpg')
+insert into Product values('Samsung TV',34000,'Samsung India',20,'https://ctb35komal.blob.core.windows.net/productimages/TV.jpg')
+insert into Product values('Apple watch',30000,'Apple India',12,'https://ctb35komal.blob.core.windows.net/productimages/watch.jpg')
+insert into Product values('TMC Protien',4000,'TMC India',15,'https://ctb35komal.blob.core.windows.net/productimages/supplement.jpg')
+insert into Product values('US Polo Shirt',2500,'US Polo India',17,'https://ctb35komal.blob.core.windows.net/productimages/shirt.jpg')
+insert into Product values('Aviator Eye glass',1000,'Aviator India',20,'https://ctb35komal.blob.core.windows.net/productimages/eye_wear.jpg')
+insert into Product values('Spyker Jeans',2000,'Spyker India',50,'https://ctb35komal.blob.core.windows.net/productimages/jeans.jpg')
+insert into Product values('Jumpsuit',500,'Rst India',20,'https://ctb35komal.blob.core.windows.net/productimages/jumpsuit.jpg')
 
 ----------------------------------------------------------------------------------------
 
